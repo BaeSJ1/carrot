@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:tesyy/page/detail.dart';
 import 'package:tesyy/repository/contents_repository.dart';
 
+import '../utils/data_utils.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -24,11 +26,6 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     currentLocation = "ara";
-  }
-  final oCcy = new NumberFormat("#,###", "ko_KR");
-  String calcStringToWon(String priceString){
-    if(priceString == "무료나눔") return priceString;
-    return "${oCcy.format(int.parse(priceString))}원";
   }
 
   @override
@@ -134,7 +131,7 @@ class _HomeState extends State<Home> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            calcStringToWon(datas[index]["price"].toString()),
+                            DataUtils.calcStringToWon(datas[index]["price"].toString()),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),

@@ -67,7 +67,7 @@ class ManorTemperature extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    level = 0;
+    level = 3;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

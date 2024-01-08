@@ -1,4 +1,9 @@
-class ContentsRepository{
+import 'dart:convert';
+
+import 'package:tesyy/repository/local_storage_repository.dart';
+
+class ContentsRepository extends LocalStorageRepository{
+  final String MY_FAVORITE_STORE_KEY="MY_FAVORITE_STORE_KEY";
     Map<String, dynamic> data = {
       "ara": [
         {
@@ -170,6 +175,36 @@ class ContentsRepository{
             //API 통신 location값을 보내주면서
           await Future.delayed(Duration(milliseconds: 1000));
           return data[location];
+        }
+
+        addMyFavoriteContent(Map<String, String> content) async{
+          String? jsonString = await this.getStoredValue(MY_FAVORITE_STORE_KEY);
+          List<dynamic> favoriteContentList = jsonDecode(jsonString!);
+          favoriteContentList.add(content);
+          this.storeValue(MY_FAVORITE_STORE_KEY, jsonEncode(favoriteContentList));
+        }
+
+        isMyFavoritecontents(String cid) async {
+          String? jsonString = await this.getStoredValue(MY_FAVORITE_STORE_KEY);
+          bool isMyFavoriteContents = false;
+
+
+          if(jsonString!=null){
+            List<dynamic> json = jsonDecode(jsonString);
+            if(json == null || !(json is List)){
+              return false;
+            }else{
+              for(dynamic data in json){
+                if(data["cid"] == cid){
+                  isMyFavoriteContents = true;
+                  break;
+                }
+              }
+            }
+            return isMyFavoriteContents;
+          }else{
+            return null;
+          }
         }
 }
 
