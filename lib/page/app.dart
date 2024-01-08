@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:tesyy/page/favorite.dart';
 
 import 'home.dart';
 
@@ -41,7 +42,7 @@ class _AppState extends State<App> {
         return Container();
         break;
       case 4:
-        return Container();
+        return MyFavoriteContents();
         break;
     }
     return Container();

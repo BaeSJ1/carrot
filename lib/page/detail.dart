@@ -293,8 +293,15 @@ class _DetailContentViewState extends State<DetailContentView> with SingleTicker
       child: Row(
         children: [
         GestureDetector(
-          onTap: (){
-            contentsRepository.addMyFavoriteContent(widget.data);
+          onTap: () async{
+
+            if(isMyFavoriteContent){
+              //제거
+              await contentsRepository.deleteMyFavoriteContent(widget.data["cid"]!);
+            }else{
+              await contentsRepository.addMyFavoriteContent(widget.data);
+            }
+
             setState(() {
               isMyFavoriteContent = !isMyFavoriteContent;
             });
